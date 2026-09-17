@@ -244,7 +244,12 @@
         font-feature-settings:"palt" 1;
         line-break:strict;
         line-height:1.8; }
-  .corps p, .corps li, .bulle p, .bloc p, .duo p{ text-align:justify; }
+  /* ⛔ PAS de text-align:justify dans cette mise en page.
+     Le justify japonais suppose une mesure de ligne d'au moins ~30 caracteres.
+     Ici une colonne fait ~18 caracteres : la justification etire alors les
+     lignes et creuse des lezardes entre les caracteres (vu le 2026-09-17 sur
+     le duo et le bloc). Alignement a gauche partout. */
+  .corps p, .corps li, .bulle p, .bloc p, .duo p{ text-align:left; }
   /* PAS de justify sur le chapo : deux lignes seulement, et un groupe insecable
      dedans. Le justify etirerait la premiere ligne et creuserait des lezardes
      entre les caracteres, ce qui est pire que la coupure qu'on corrige. */
