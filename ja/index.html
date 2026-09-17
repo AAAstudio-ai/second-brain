@@ -244,7 +244,20 @@
         font-feature-settings:"palt" 1;
         line-break:strict;
         line-height:1.8; }
-  .corps p, .corps li, .bulle p, .bloc p, .duo p, .chapo .dire, .chapo .apropos{ text-align:justify; }
+  .corps p, .corps li, .bulle p, .bloc p, .duo p{ text-align:justify; }
+  /* PAS de justify sur le chapo : deux lignes seulement, et un groupe insecable
+     dedans. Le justify etirerait la premiere ligne et creuserait des lezardes
+     entre les caracteres, ce qui est pire que la coupure qu'on corrige. */
+  .chapo .dire, .chapo .apropos{ text-align:left; }
+  /* Coupe aux frontieres de syntagmes (文節) et non au caractere pres : evite
+     qu'un groupe comme 「知っておくべきこと」 soit tranche en fin de ligne.
+     Chrome et Edge l'appliquent ; Safari l'ignore sans rien casser. */
+  .chapo .dire, .chapo .apropos, .souffle, .hd .suite, h1, h2, h2 small,
+  .t, .s, .corps p, .corps li, .cle, .bulle p, .bloc p, .duo p, .astuce, .titre{
+    word-break: auto-phrase; }
+  /* Safari ignore auto-phrase : pour un groupe qu'on ne veut jamais voir coupe,
+     l'envelopper dans <span class="lie">. A reserver aux groupes courts. */
+  .lie{ white-space:nowrap; }
   h1,h2,h3,.surtitre,.t,.s,.titre,.qui{ line-height:1.35; }
   h2{ letter-spacing:.01em; }
   h2 small{ line-height:1.6; }
@@ -273,7 +286,7 @@
 </header>
 
 <div class="chapo">
-  <p class="dire">セカンドブレイン（第二の脳）、別名<strong>ヴォールト</strong>とは、自分のパソコンの中にある、ふつうのテキストファイルを集めたフォルダーです。会社についてAIが知っておくべきことをすべて収めておくことで、AIが毎朝ゼロから始めずに済むようになります。</p>
+  <p class="dire">セカンドブレイン（第二の脳）、別名<strong>ヴォールト</strong>とは、自分のパソコンの中にある、ふつうのテキストファイルを集めたフォルダーです。<span class="lie">会社についてAIが知っておくべきことを</span>すべて収めておくことで、AIが毎朝ゼロから始めずに済むようになります。</p>
   <p class="apropos">このページでは、ヴォールトとは何か、どのように作られ、何が変わるのかを説明します。特定の会社や特定のAIの話ではありません。</p>
 </div>
 
